@@ -42,7 +42,9 @@ submitBtn.addEventListener('click', () => {
                 seller: false
             };
             localStorage.setItem('user', JSON.stringify(user));
-            alert('Your details have been successfully saved.');
+            // alert('Your details have been successfully saved.');
+             // Display registration successful message
+             showRegistrationSuccess();
 
             // Redirect to login page
             location.replace('login.html');
@@ -62,5 +64,4 @@ submitBtn.addEventListener('click', () => {
 function showAlert(message) {
     alert(message);
 }
-
 

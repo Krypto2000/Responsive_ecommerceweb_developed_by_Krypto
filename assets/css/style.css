@@ -49,11 +49,38 @@ header{
     box-shadow: 0 1px 4px hsl(0 4% 15% / 10%);
     z-index: 100;
 }
-.nav{
+.nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 20px 0;
+    height: 80px; /* Adjust height as needed */
+    background-color: rgb(252, 27, 102); /* Background color for the navigation section */
+    width: 100%;
+}
+.brand {
+    display: flex;
+    align-items: center;
+    margin-right: auto;
+    position: relative;
+}
+
+#brand-text {
+    position: absolute;
+    font-size: 30px; /* Adjust size as needed */
+    font-weight: bold;
+    color: #fff; /* Set color for 'Euro' */
+}
+
+.pink {
+    color:  black; /* Set color for 'pia' */
+}
+
+#cart-icon1 {
+    position: absolute;
+    font-size: 70px; /* Adjust size of the cart icon */
+    left: 103px;
+    color: #fff;
 }
 .logo{
     font-size: 1.1rem;
@@ -68,6 +95,7 @@ header{
 #cart-icon{
     font-size: 1.8rem;
     cursor: pointer;
+    color: #fff;
 }
 
 /*SEARCH */
@@ -82,7 +110,7 @@ header{
     padding: 10px;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
-    border: 1px solid #d1d1d1;
+    border: 2px solid #fff;
     text-transform: capitalize;
     background: none;
     color: #a9a9a9;
@@ -105,7 +133,7 @@ header{
 }
 
 .search-box::placeholder{
-    color: #a9a9a9;
+    color: #fff;
 }
 /* CART  */
 .cart{
@@ -163,7 +191,7 @@ header{
     position: absolute;
     top: 3px;
     right: -3px;
-    background-color: rgb(252, 27, 102);
+    background-color: black;
     color: white;
     border-radius: 50%;
     font-size: 1.3rem;
@@ -174,6 +202,7 @@ header{
 align-items: center;
   }
   
+/* Media query for mobile devices */
 
 
 .detail-box{
@@ -198,6 +227,10 @@ align-items: center;
     font-size: 24px;
     color: var(--main-color);
     cursor: pointer;
+}
+#cart-count{
+    color: black;
+    background-color: #fff;
 }
 .total{
     display: flex;
@@ -519,3 +552,35 @@ align-items: center;
       row-gap: 3rem;
     }
   }
+  @media (max-width: 768px) {
+    .search {
+        width: 400px;
+        margin-right: 80px;
+        margin-top: 50px;
+        margin-bottom: 0px;
+    }
+    .search-box{
+        width: 70%;
+    }
+    .nav{
+        height: 130px;
+        position: relative;
+        width: 100%;
+    }
+    #user-img{
+        position: absolute;
+        top: -35px;
+        left: 140px;
+    }
+    .icon{
+        position: absolute;
+        top: 65px;
+        left: 0.0000001px;
+       
+    }
+    .brand{
+        position: absolute;
+        left: 130px;
+        top: 30px;
+    }
+    }
