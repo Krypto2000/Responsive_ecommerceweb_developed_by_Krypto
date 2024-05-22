@@ -27,7 +27,7 @@ function start() {
 // ============= UPDATE & RERENDER ===========
 function update() {
   addEvents();
-  updateTotal();
+
 }
 
 // =============== ADD EVENTS ===============
