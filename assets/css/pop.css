@@ -1,0 +1,102 @@
+/* Keyframes for the popup animation */
+@keyframes slideDown {
+    from {
+        top: -100%;
+        opacity: 0;
+    }
+    to {
+        top: 50%;
+        opacity: 1;
+    }
+}
+
+/* Discount Popup Styles */
+.discount-popup {
+    display: none;
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 800px;
+    height: auto;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    border-radius: 8px;
+    overflow: hidden;
+    animation: slideDown 0.5s ease forwards;
+}
+
+.popup-header {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+    background-color: #eee;
+    border-bottom: 1px solid #ccc;
+}
+
+.popup-header .fa-times {
+    cursor: pointer;
+}
+
+.popup-content {
+    padding: 20px;
+    text-align: center;
+}
+
+.popup-content p {
+    margin: 0 0 10px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.popup-image {
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 768px) {
+    .discount-popup {
+        width: 90%;
+    }
+
+    .popup-content p {
+        font-size: 16px;
+    }
+}
+
+/*/*Welcome Message
+/* Keyframes for moving text animation */
+@keyframes moveLeft {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(100%);
+    }
+}
+
+/* Welcome Message Styles */
+#welcome-message {
+    width: 100%;
+    overflow: hidden;
+    background-color: #1d1b1bea;
+    padding: 10px 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    white-space: nowrap; /* Prevent text from wrapping */
+    backdrop-filter: blur(7px);
+}
+
+#welcome-message p {
+    display: inline-block;
+    padding-right: 100%; /* Start position off-screen */
+    font-size: 18px;
+    color: whitesmoke;
+    animation: moveLeft 18s linear infinite;
+    margin-top: 5rem;
+   
+}

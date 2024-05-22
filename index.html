@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/user.css">
     <link rel="stylesheet" href="assets/css/whatsapp.css">
+    <link rel="stylesheet" href="assets/css/pop.css">
 </head>
 
 <body>
@@ -91,7 +92,10 @@
             </div>
         </div>
     </header>
-
+<!-- Welcome Message Div -->
+<div id="welcome-message" class="welcome-message">
+    <p>Welcome to Europia, for more enquiries, contact us on +2348167897976</p>
+</div>
 
     <!-- SHOP SECTION  -->
     <div class="whatsapp-btn-container">
@@ -293,7 +297,18 @@
     </div>
 </div>
 
-
+<!--Pop-up-->
+<!-- Discount Popup Div -->
+<div id="discount-popup" class="discount-popup">
+    <div class="popup-header">
+        <i class="fas fa-times" id="close-popup"></i>
+    </div>
+    <div class="popup-content">
+        <p>Use Promo Code (SAVE 10) to get 10% discount on all prices</p>
+        <!-- You can add an image here if needed -->
+        <img src="assets/img/popup.jpg" alt="Discount Image" class="popup-image">
+    </div>
+</div>
 <!-- Footer -->
 <footer class="footer">
     <div class="row">
@@ -324,6 +339,7 @@
    
     <script src="assets/js/main.js"></script>
     <script src="assets/js/user.js"></script>npm install -g http-server
+    <script src="assets/js/popup.js"></script>
     
   
    

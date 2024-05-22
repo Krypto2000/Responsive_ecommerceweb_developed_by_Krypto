@@ -64,75 +64,94 @@ function handleAddCartItem() {
   let price = product.querySelector(".product-price").innerHTML;
   let imgSrc = product.querySelector(".product-img").src;
 
-  let newToAdd = { title, price, imgSrc };
-
-  // Check if item already exists
-  if (itemsAdded.find((el) => el.title === newToAdd.title)) {
-    alert("This Item Is Already Exist!");
-    return;
+  let existingItem = itemsAdded.find((el) => el.title === title);
+  if (existingItem) {
+    // If item already exists, increment its quantity
+    existingItem.quantity++;
   } else {
+    // If item doesn't exist, add it to the cart with quantity 1
+    let newToAdd = { title, price, imgSrc, quantity: 1 };
     itemsAdded.push(newToAdd);
   }
 
   localStorage.setItem('itemsAdded', JSON.stringify(itemsAdded));
 
-  // Add product to cart
-  let cartBoxElement = createCartBoxComponent(title, price, imgSrc);
-  let newNode = document.createElement("div");
-  newNode.innerHTML = cartBoxElement;
-  const cartContent = cart.querySelector(".cart-content");
-  cartContent.appendChild(newNode);
+  // Render cart items
+  renderCartItems();
 
   // Update cart count based on the number of items in the cart
-  document.getElementById('cart-count').textContent = itemsAdded.length;
-
+  document.getElementById('cart-count').textContent = calculateTotalQuantity();
   update();
 }
 
-// Retrieve items from local storage and render them
+function renderCartItems() {
+  const cartContent = document.querySelector(".cart-content");
+  cartContent.innerHTML = ""; // Clear existing content
+  
+  itemsAdded.forEach(item => {
+    let cartBoxElement = createCartBoxComponent(item.title, item.price, item.imgSrc, item.quantity);
+    let newNode = document.createElement("div");
+    newNode.innerHTML = cartBoxElement;
+    cartContent.appendChild(newNode);
+  });
+}
+
+function createCartBoxComponent(title, price, imgSrc, quantity) {
+  return `
+    <div class="cart-box">
+        <img src=${imgSrc} alt="" class="cart-img">
+        <div class="detail-box">
+            <div class="cart-product-title">${title}</div>
+            <div class="cart-price">${price}</div>
+            <input type="number" value="${quantity}" class="cart-quantity">
+        </div>
+        <!-- REMOVE CART  -->
+        <i class='bx bxs-trash-alt cart-remove'></i>
+    </div>`;
+}
+
+function calculateTotalQuantity() {
+  let totalQuantity = 0;
+  itemsAdded.forEach(item => {
+    totalQuantity += item.quantity;
+  });
+  return totalQuantity;
+}
+
 function loadCartFromLocalStorage() {
   const storedItems = localStorage.getItem('itemsAdded');
   if (storedItems) {
     itemsAdded = JSON.parse(storedItems);
-
-    const cartContent = document.querySelector(".cart-content");
-    itemsAdded.forEach(item => {
-      let cartBoxElement = createCartBoxComponent(item.title, item.price, item.imgSrc);
-      let newNode = document.createElement("div");
-      newNode.innerHTML = cartBoxElement;
-      cartContent.appendChild(newNode);
-    });
-
-    // Update cart count
-    document.getElementById('cart-count').textContent = itemsAdded.length;
-
-    // Ensure event listeners are added to the dynamically created elements
+    renderCartItems();
+    document.getElementById('cart-count').textContent = calculateTotalQuantity();
     update();
   }
 }
 
 function handleRemoveCartItem() {
-  this.parentElement.remove();
-  itemsAdded = itemsAdded.filter(
-    (el) => el.title !== this.parentElement.querySelector(".cart-product-title").innerHTML
-  );
-
+  let productTitle = this.parentElement.querySelector(".cart-product-title").innerHTML;
+  itemsAdded = itemsAdded.filter((el) => el.title !== productTitle);
   localStorage.setItem('itemsAdded', JSON.stringify(itemsAdded));
+  renderCartItems();
+  document.getElementById('cart-count').textContent = calculateTotalQuantity();
   update();
 }
 
 function handleChangeItemQuantity() {
-  if (isNaN(this.value) || this.value < 1) {
-    this.value = 1;
+  let productTitle = this.parentElement.parentElement.querySelector(".cart-product-title").innerHTML;
+  let item = itemsAdded.find((el) => el.title === productTitle);
+  if (item) {
+    item.quantity = parseInt(this.value);
+    localStorage.setItem('itemsAdded', JSON.stringify(itemsAdded));
+    renderCartItems();
+    document.getElementById('cart-count').textContent = calculateTotalQuantity();
+    update();
   }
-  this.value = Math.floor(this.value); // to keep it integer
-
-  update();
 }
 
 function handleBuyOrder() {
   if (itemsAdded.length <= 0) {
-    alert("There is No Order to Place Yet! \nPlease Make an Order first.");
+    alert("There are no items in the cart. Please add items before placing an order.");
     return;
   }
   // Check if the user is logged in
@@ -141,49 +160,18 @@ function handleBuyOrder() {
   if (!userLoggedIn) {
     // Redirect to signup page if not logged in
     window.location.href = 'signup.html';
-    alert("Please log in first to place your order.")
-  
     return;
   }
-// Redirect to payment page if the user is logged in
-window.location.href = 'payment.html';
 
-  const cartContent = cart.querySelector(".cart-content");
+  // Redirect to payment page if the user is logged in
+  window.location.href = 'payment.html';
+
+  const cartContent = document.querySelector(".cart-content");
   cartContent.innerHTML = "";
-  alert("Your Order is Placed Successfully :)");
+  alert("Your order has been placed successfully.");
   itemsAdded = [];
   localStorage.setItem('itemsAdded', JSON.stringify(itemsAdded));
+  renderCartItems();
+  document.getElementById('cart-count').textContent = calculateTotalQuantity();
   update();
-}
-
-// =========== UPDATE & RERENDER FUNCTIONS =========
-function updateTotal() {
-  let cartBoxes = document.querySelectorAll(".cart-box");
-  const totalElement = cart.querySelector(".total-price");
-  let total = 0;
-
-  cartBoxes.forEach((cartBox) => {
-    let priceElement = cartBox.querySelector(".cart-price");
-    let price = parseFloat(priceElement.innerHTML.replace("$", ""));
-    let quantity = cartBox.querySelector(".cart-quantity").value;
-    total += price * quantity;
-  });
-
-  total = total.toFixed(2);
-  totalElement.innerHTML = "$" + total;
-}
-
-// ============= HTML COMPONENTS =============
-function createCartBoxComponent(title, price, imgSrc) {
-  return `
-    <div class="cart-box">
-        <img src=${imgSrc} alt="" class="cart-img">
-        <div class="detail-box">
-            <div class="cart-product-title">${title}</div>
-            <div class="cart-price">${price}</div>
-            <input type="number" value="1" class="cart-quantity">
-        </div>
-        <!-- REMOVE CART  -->
-        <i class='bx bxs-trash-alt cart-remove'></i>
-    </div>`;
 }
