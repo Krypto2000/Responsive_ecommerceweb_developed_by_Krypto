@@ -1,7 +1,7 @@
 window.onload = () => {
     const userData = localStorage.getItem('user');
     if(userData) {
-        location.replace('products.html');
+        location.replace('index.html');
     }
 }
 
@@ -42,19 +42,19 @@ submitBtn.addEventListener('click', () => {
                 seller: false
             };
             localStorage.setItem('user', JSON.stringify(user));
-            // alert('Your details have been successfully saved.');
+            alert('Your details have been successfully saved.');
              // Display registration successful message
-             showRegistrationSuccess();
+          
 
             // Redirect to login page
-            location.replace('login.html');
+            location.replace('index.html');
         }
     } else{
         // login page
         const storedUser = JSON.parse(localStorage.getItem('user'));
         if(storedUser && storedUser.email === email.value && storedUser.password === password.value){
             // Redirect to products page
-            location.replace('products.html');
+            location.replace('login.html');
         } else{
             showAlert('Invalid email or password');
         }

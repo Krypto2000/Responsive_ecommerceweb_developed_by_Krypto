@@ -42,7 +42,6 @@ textarea{
     border: none;
     outline: none;
     margin: 20px 0;
-    text-transform: capitalize;
     color: #383838;
     font-size: 14px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.01);
@@ -58,10 +57,9 @@ textarea{
     height: 40px;
     text-align: center;
     line-height: 40px;
-    background: #383838;
+    background: rgb(252, 27, 102);
     color: #fff;
     border-radius: 2px;
-    text-transform: capitalize;
     border: none;
     cursor: pointer;
     display: block;
@@ -105,7 +103,7 @@ textarea{
 }
 
 label{
-    text-transform: capitalize;
+   
     display: inline-block;
     margin-bottom: 10px;
     font-size: 14px;
@@ -118,7 +116,7 @@ label a{
 
 .link{
     color: #383838;
-    text-transform: capitalize;
+
     text-align: center;
     display: block;
 }
@@ -194,4 +192,86 @@ label a{
   #password {
     padding-right: 30px; /* Leave space for the toggle icon */
   }
- 
+  .brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+#brand-text {
+    position: absolute;
+    font-size: 30px; /* Adjust size as needed */
+    font-weight: bold;
+    color: rgb(252, 27, 102); /* Set color for 'Euro' */
+}
+#cart-icon1 {
+    position: absolute;
+    font-size: 50px; /* Adjust size of the cart icon */
+    left: 200px;
+   color:  rgb(252, 27, 102);
+   
+   
+}
+
+.pink {
+    color:   #383838; /* Set color for 'pia' */
+}
+/* Media Queries */
+@media (max-width: 768px) {
+    input[type="text"],
+    input[type="password"],
+    input[type="email"],
+    textarea,
+    .submit-btn,
+    .alert-box {
+        width: 250px;
+    }
+
+    .logo {
+        height: 60px;
+        margin: 0 auto 30px;
+    }
+
+    .alert-box {
+        width: 250px;
+        padding: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    input[type="text"],
+    input[type="password"],
+    input[type="email"],
+    textarea,
+    .submit-btn,
+    .alert-box {
+        width: 200px;
+    }
+
+    .logo {
+        height: 50px;
+        margin: 0 auto 20px;
+    }
+
+    .alert-box {
+        width: 200px;
+        padding: 10px;
+    }
+
+    #brand-text {
+        font-size: 24px;
+    }
+
+    #cart-icon1 {
+        font-size: 40px;
+        left: 150px;
+    }
+    .checkbox-container label::after{
+        width: 10px;
+
+    }
+    .checkbox{
+        justify-content: center;
+    }
+}
