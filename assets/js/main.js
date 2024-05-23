@@ -90,6 +90,14 @@ function handleAddCartItem() {
   document.getElementById('cart-count').textContent = calculateTotalQuantity();
   update();
 }
+function  handle_changeItemQuantity() {
+  if (isNaN(this.value) || this.value < 1) {
+    this.value = 1;
+  }
+  this.value = Math.floor(this.value); // to keep it integer
+
+  update();
+}
 
 function renderCartItems() {
   const cartContent = document.querySelector(".cart-content");
