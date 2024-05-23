@@ -2,6 +2,13 @@
 const cartIcon = document.querySelector("#cart-icon");
 const cart = document.querySelector(".cart");
 const closeCart = document.querySelector("#cart-close");
+const cartCountElement = document.getElementById('cart-count');
+let cartCount = parseInt(cartCountElement.textContent);
+
+if (isNaN(cartCount)) {
+    // Handle cases where cart count is not a number
+    cartCount = 0; // Set cart count to 0 if it's not a valid number
+}
 
 cartIcon.addEventListener("click", () => {
   cart.classList.add("active");
